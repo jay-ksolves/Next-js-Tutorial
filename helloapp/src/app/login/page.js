@@ -21,7 +21,7 @@ function LoginPage() {
             <div className='  p-5'>
                 <h1 className='text-light text-center' style={{ fontFamily: "lobster" }}>Welcome to Login page.</h1>
                 <br />
-                <div className='glass text-light card p-3' style={{ maxWidth: '18rem', marginLeft: '40%' }}>
+                <div className='glass text-light card bg-dark p-3' style={{ maxWidth: '18rem', marginLeft: '40%' }}>
                     <label htmlFor='EmailId' >Email Id</label>
                     <input className='form-control' placeholder='Email Id' value={user.email}
                         onChange={(e) => setUser({ ...user, email: e.target.value })} />

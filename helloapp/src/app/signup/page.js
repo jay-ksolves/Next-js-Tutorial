@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useEffect } from 'react'
-import { axios } from 'axios'
-import { useRouter } from 'next/router'
+import React, { useEffect } from 'react';
+import axios from 'axios';
+// import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link'
+import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 function Signup() {
 
     const router = useRouter();
@@ -14,9 +17,24 @@ function Signup() {
         password: "",
     })
     const [buttonDisabled, setButtonDisabled] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
 
     const onSignup = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.post("/api/users/signup", user);
+            console.log("sucessfully signedUp", response.data);
+            router.push('/login');
 
+
+        } catch (error) {
+            console.log("signup failed", error.message);
+            toast.error(error.message)
+
+        }
+        finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -36,9 +54,11 @@ function Signup() {
 
         <div>
             <div className='  p-5'>
-                <h1 className='text-light text-center' style={{ fontFamily: "lobster" }}>Welcome to Signup page.</h1>
+                <Toaster position="right-top" reverseOrder={false} />
+                <h1 className='text-light text-center' style={{ fontFamily: "lobster" }}>{loading ? "Processing" : "Welcome to Signup page."}</h1>
                 <br />
-                <div className='glass text-light  card p-3' style={{ maxWidth: '18rem', marginLeft: '40%' }}>                    <label htmlFor='username' >Username</label>
+                <div className='glass text-light  bg-dark card p-3' style={{ maxWidth: '18rem', marginLeft: '40%' }}>
+                    <label htmlFor='username' >Username</label>
                     <input className='form-control' placeholder='Username' value={user.username}
                         onChange={(e) => setUser({ ...user, username: e.target.value })} />
                     <label htmlFor='EmailId' >Email Id</label>
