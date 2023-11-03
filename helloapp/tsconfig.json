@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/api/users/signup/route.ts"  ],
   "exclude": [
     "node_modules"
   ]

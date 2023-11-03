@@ -23,7 +23,7 @@ function Signup() {
         try {
             setLoading(true);
             const response = await axios.post("/api/users/signup", user);
-            console.log("sucessfully signedUp", response.data);
+            console.log("successfully signedUp", response.data);
             router.push('/login');
 
 
